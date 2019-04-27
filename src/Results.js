@@ -58,6 +58,7 @@ export class Results extends Component {
               animal={petObject.animal}
               key={petObject.id}
               media={petObject.media}
+              id={petObject.id}
               location={`${petObject.contact.city}, ${petObject.contact.state}`}
               {...petObject}
             />
