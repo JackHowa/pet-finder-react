@@ -5,14 +5,9 @@ import pf from "petfinder-client";
 const LOCATION_STATE_CITY = "Chicago, IL";
 
 export class Results extends Component {
-  // super props calls parents constructor
-  // react is unable to track props without it
-  constructor(props) {
-    super(props);
-    this.state = {
-      pets: []
-    };
-  }
+  state = {
+    pets: []
+  };
 
   componentDidMount() {
     // returns promise that represents a future value
