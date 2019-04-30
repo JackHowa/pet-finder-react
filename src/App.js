@@ -1,11 +1,18 @@
 import React from "react";
 import { render } from "react-dom";
-import { Router, Link } from "@reach/router";
+import { Router } from "@reach/router";
+import Loadable from "react-loadable";
 import Results from "./Results";
-import { Details } from "./Details";
 import { SearchParams } from "./SearchParams";
 import pf from "petfinder-client";
 import { Provider } from "./SearchContext";
+import NavBar from "./NavBar";
+
+const LoadableDetails = Loadable({
+  // split out details into a separate bundle
+  loader: () => import("./Details"),
+  loading: () => <h1>loading split out code</h1>
+});
 
 class App extends React.Component {
   constructor(props) {
@@ -46,8 +53,7 @@ class App extends React.Component {
           } else {
             this.setState({ breeds: [] });
           }
-        })
-        .catch(console.error);
+        });
     } else {
       this.setState({
         breeds: []
@@ -60,14 +66,12 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <header>
-          <Link to="/">Adopt Me</Link>
-        </header>
+        <NavBar />
         <Provider value={this.state}>
           <Router>
             <SearchParams path="/search-params" />
             <Results path="/" />
-            <Details path="/details/:id" />
+            <LoadableDetails path="/details/:id" />
           </Router>
         </Provider>
       </div>
