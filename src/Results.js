@@ -1,8 +1,8 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { Pet } from "./Pet";
 import pf from "petfinder-client";
-import { SearchBox } from "./SearchBox";
-import { Consumer } from "./SearchContext";
+import SearchBox from "./SearchBox";
 
 class Results extends Component {
   constructor(props) {
@@ -19,10 +19,10 @@ class Results extends Component {
   search = () => {
     pf()
       .pet.find({
-        location: this.props.searchParams.location,
+        location: this.props.location,
         output: "full",
-        animal: this.props.searchParams.animal,
-        breed: this.props.searchParams.breed
+        animal: this.props.animal,
+        breed: this.props.breed
       })
       .then(data => {
         let pets;
@@ -76,10 +76,10 @@ class Results extends Component {
   }
 }
 
-export default function ResultsWithContext(props) {
-  return (
-    <Consumer>
-      {context => <Results {...props} searchParams={context} />}
-    </Consumer>
-  );
-}
+const mapStateToProps = ({ location, breed, animal }) => ({
+  location,
+  breed,
+  animal
+});
+
+export default connect(mapStateToProps)(Results);
