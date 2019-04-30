@@ -1,10 +1,11 @@
-import React, { Component } from "react";
+import React, { Component, lazy } from "react";
 import pf from "petfinder-client";
 import { navigate } from "@reach/router";
 import { Carousel } from "./Carousel";
-import Modal from "./Modal";
 
-export class Details extends Component {
+const Modal = lazy(() => import("./Modal"));
+
+export default class Details extends Component {
   state = {
     loading: true,
     error: "",
