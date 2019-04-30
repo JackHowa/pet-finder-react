@@ -2,17 +2,13 @@ import React, { Component } from "react";
 import pf from "petfinder-client";
 import { navigate } from "@reach/router";
 import { Carousel } from "./Carousel";
+import Modal from "./Modal";
 
 export class Details extends Component {
   state = {
     loading: true,
-    breed: "",
-    animal: "",
-    name: "",
-    location: "",
-    description: "",
-    media: "",
-    error: ""
+    error: "",
+    showModal: false
   };
 
   componentDidMount() {
@@ -41,8 +37,9 @@ export class Details extends Component {
         });
       })
       .catch(() => navigate("/"));
-    // this.setState({ error: err })
   }
+
+  toggleModal = () => this.setState({ showModal: !this.state.showModal });
 
   render() {
     const {
@@ -52,7 +49,8 @@ export class Details extends Component {
       location,
       media,
       description,
-      loading
+      loading,
+      showModal
     } = this.state;
 
     if (loading) {
@@ -61,11 +59,24 @@ export class Details extends Component {
     return (
       <div className="details">
         <Carousel media={media} />
-
         <div>
           <h1>{name}</h1>
           <h2>{`${animal} — ${breed} — ${location}`}</h2>
           <p>{description}</p>
+          <button onClick={this.toggleModal}>Adopt {name}</button>
+          <div>
+            {showModal ? (
+              <Modal>
+                <h1>Would you like to adopt {name}?</h1>
+                <div className="buttons">
+                  <button onClick={this.toggleModal}>Yes</button>
+                  <button onClick={this.toggleModal}>No</button>
+                </div>
+              </Modal>
+            ) : (
+              <div />
+            )}
+          </div>
         </div>
       </div>
     );
