@@ -1,6 +1,13 @@
 {
   "presets": [
-    "react",
+    "@babel/preset-react",
+    "@babel/preset-env",
+    [
+      "@emotion/babel-preset-css-prop",
+      {
+        "sourceMap": false
+      }
+    ],
     [
       "env",
       {
@@ -10,5 +17,6 @@
       }
     ]
   ],
+
   "plugins": ["transform-class-properties"]
 }
