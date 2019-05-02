@@ -1,6 +1,6 @@
 import React from "react";
 import { create } from "react-test-renderer";
-import { Details } from "../Details";
+import Details from "../Details";
 
 test("snapshot", () => {
   // if anything changes, then will fail
