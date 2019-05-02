@@ -1,7 +1,7 @@
 import React, { Component, lazy } from "react";
 import pf from "petfinder-client";
 import { navigate } from "@reach/router";
-import { Carousel } from "./Carousel";
+import Carousel from "./Carousel";
 
 const Modal = lazy(() => import("./Modal"));
 
