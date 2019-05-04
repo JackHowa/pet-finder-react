@@ -61,7 +61,7 @@ export default class Details extends Component {
           <h1>{name}</h1>
           <h2>{`${animal} — ${breed} — ${location}`}</h2>
           <p>{description}</p>
-          <ModalContainer />
+          <ModalContainer text={`Adopt ${name}`} />
         </div>
       </div>
     );
