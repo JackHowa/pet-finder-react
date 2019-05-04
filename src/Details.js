@@ -1,15 +1,13 @@
-import React, { Component, lazy } from "react";
+import React, { Component } from "react";
 import pf from "petfinder-client";
 import { navigate } from "@reach/router";
 import Carousel from "./Carousel";
-
-const Modal = lazy(() => import("./Modal"));
+import ModalContainer from "./ModalContainer";
 
 export default class Details extends Component {
   state = {
     loading: true,
-    error: "",
-    showModal: false
+    error: ""
   };
 
   componentDidMount() {
@@ -50,8 +48,7 @@ export default class Details extends Component {
       location,
       media,
       description,
-      loading,
-      showModal
+      loading
     } = this.state;
 
     if (loading) {
@@ -64,20 +61,7 @@ export default class Details extends Component {
           <h1>{name}</h1>
           <h2>{`${animal} — ${breed} — ${location}`}</h2>
           <p>{description}</p>
-          <button onClick={this.toggleModal}>Adopt {name}</button>
-          <div>
-            {showModal ? (
-              <Modal>
-                <h1>Would you like to adopt {name}?</h1>
-                <div className="buttons">
-                  <button onClick={this.toggleModal}>Yes</button>
-                  <button onClick={this.toggleModal}>No</button>
-                </div>
-              </Modal>
-            ) : (
-              <div />
-            )}
-          </div>
+          <ModalContainer />
         </div>
       </div>
     );
